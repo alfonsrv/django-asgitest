@@ -5,6 +5,7 @@ pip install -r requirements.txt
 mv sample-dotenv .env
 vi .env
 set -o allexport; source .env; set +o allexport
+python manage.py migrate
 python manage.py test core.tests
 ```
 
