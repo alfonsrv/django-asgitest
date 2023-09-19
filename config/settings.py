@@ -7,7 +7,7 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+SITE_ID = 1
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-j!(t9@*ps5zmozm8z_74o$gx!7&jv_z@)dly%d30$8*+ig-sj+'
@@ -37,6 +37,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'chat',
     'core',
 ]
 ASYNC_APPS = [

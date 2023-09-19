@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Channels Test</title>
+</head>
+<body>
+{% for user in users %}
+  <div id="user-{{ user.pk }}">{{ user }}</div>
+{% endfor %}
+</body>
+</html>

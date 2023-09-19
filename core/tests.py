@@ -25,7 +25,7 @@ class TestRegular(TestCase):
         )
 
 
-class ChatTests(ChannelsLiveServerTestCase):
+class DatabaseTest(ChannelsLiveServerTestCase):
     serve_static = True  # emulate StaticLiveServerTestCase
 
     @classmethod
@@ -43,24 +43,23 @@ class ChatTests(ChannelsLiveServerTestCase):
         cls.driver.quit()
         super().tearDownClass()
 
-    async def test_when_chat_message_posted_then_seen_by_everyone_in_same_room(self):
-        await self._enter_admin()
+    def test_admin_auth(self):
+        self._enter_admin()
         import time; time.sleep(5)
 
-    @database_sync_to_async
     def _enter_admin(self):
-        self.driver.get(self.live_server_url + "/admin/")
         user_staff = User.objects.create(
-            username='test',
-            email='foo@bar.com',
+            username='test2',
+            email='foo@barx.com',
             password=make_password('hunter42'),
             is_staff=True,
         )
+        self.driver.get(self.live_server_url + "/chat/test/")
         import time; time.sleep(5)
+        self.driver.get(self.live_server_url + "/admin/")
         self.driver.find_element('name', 'username').send_keys(user_staff.username)
         self.driver.find_element('name', 'password').send_keys('hunter42')
         self.driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
-        import pdb; pdb.set_trace()
 
     def _open_new_window(self):
         self.driver.execute_script('window.open("about:blank", "_blank");')
